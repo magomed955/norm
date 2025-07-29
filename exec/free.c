@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmutsulk <mmutsulk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mubersan <mubersan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 22:57:01 by mubersan          #+#    #+#             */
-/*   Updated: 2025/07/29 17:51:24 by mmutsulk         ###   ########.fr       */
+/*   Updated: 2025/07/29 22:27:39 by mubersan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,27 @@ void	free_env(t_env *env)
 	int	i;
 
 	i = 0;
-	if (!env || !env->env)
+	if(!env)
 		return ;
-	while (env->env[i])
+	if (env->env)
 	{
-		free(env->env[i]);
-		i++;
+		while (env->env[i])
+		{
+			free(env->env[i]);
+			i++;
+		}
+		free(env->env);
 	}
-	free(env->env);
+	if (env->export_only)
+	{
+		i = 0;
+		while (env->export_only[i])
+		{
+			free(env->export_only[i]);
+			i++;
+		}
+		free(env->export_only);
+	}
 }
 
 void	free_data(t_data *data)
