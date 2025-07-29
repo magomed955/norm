@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmutsulk <mmutsulk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mubersan <mubersan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 23:17:09 by mubersan          #+#    #+#             */
-/*   Updated: 2025/07/29 18:57:25 by mmutsulk         ###   ########.fr       */
+/*   Updated: 2025/07/29 22:56:47 by mubersan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,29 @@ void	handle_word_cmd(t_cmd *cmd, t_token *token)
 {
 	if (cmd->cmd == NULL)
 	{
-		cmd->cmd = ft_strdup(token->content);
+		if (token->type == DQUOTE || token->type == QUOTE)
+		{
+			cmd->cmd = ft_strdup(token->content);
+			if (cmd->args)
+			{
+				free(cmd->args);
+				cmd->args = NULL;
+			}
+		}
+		else
+		{
+			cmd->cmd = ft_strdup(token->content);
+		}
 	}
 	else
 	{
-		if (cmd->args == NULL)
-			init_first_arg(cmd, token);
-		else
-			add_arg_to_existing(cmd, token);
+		if (token->type != DQUOTE && token->type != QUOTE)
+		{
+			if (cmd->args == NULL)
+				init_first_arg(cmd, token);
+			else
+				add_arg_to_existing(cmd, token);
+		}
 	}
 }
 

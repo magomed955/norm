@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmutsulk <mmutsulk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mubersan <mubersan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 19:15:36 by mmutsulk          #+#    #+#             */
-/*   Updated: 2025/07/29 19:23:09 by mmutsulk         ###   ########.fr       */
+/*   Updated: 2025/07/29 23:00:25 by mubersan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,16 @@ char	*prepare_path(char *cmd, t_data *data)
 
 	if (!cmd || !cmd[0])
 		return (NULL);
+	if (strchr(cmd, ' '))
+	{
+		if (access(cmd, F_OK) == 0)
+		{
+			if (is_directory(cmd))
+				return (NULL);
+			return (ft_strdup(cmd));
+		}
+		return (NULL);
+	}
 	argv = ft_split(cmd, ' ');
 	if (!argv)
 		return (NULL);

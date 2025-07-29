@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_fork.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmutsulk <mmutsulk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mubersan <mubersan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 19:15:34 by mmutsulk          #+#    #+#             */
-/*   Updated: 2025/07/29 20:14:15 by mmutsulk         ###   ########.fr       */
+/*   Updated: 2025/07/29 23:14:24 by mubersan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,18 @@ void	execute_cmd(char *path, char **argv, t_data *data)
 	}
 }
 
+static void close_cfd(t_cmd *cmd, t_data *data) {
+  int fd;
+  
+  (void)cmd;
+  (void)data;
+  fd = 3;
+  while (fd < 1024) {
+    close(fd);
+    fd++;
+  }
+}
+
 void	execute_one_cmd(t_cmd *cmd, t_exec_context *ctx, t_data *data,
 		t_token *tokens)
 {
@@ -67,6 +79,7 @@ void	execute_one_cmd(t_cmd *cmd, t_exec_context *ctx, t_data *data,
 	if (!redirect_output(cmd, ctx->fds, ctx->index, ctx->is_last))
 		cleanup_and_exit(NULL, data, 1);
 	close_unused_fds(ctx);
+	close_cfd(cmd, data);
 	argv = build_argv(cmd);
 	handle_empty_argv(argv, data);
 	handle_builtin_execution(argv, data);
