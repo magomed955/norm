@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmutsulk <mmutsulk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mubersan <mubersan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 20:31:59 by mubersan          #+#    #+#             */
-/*   Updated: 2025/07/29 18:06:02 by mmutsulk         ###   ########.fr       */
+/*   Updated: 2025/07/30 17:01:52 by mubersan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,10 @@ int	handle_heredoc_parent(pid_t pid, int *fds, t_data *data)
 	enable_echoctl();
 	signal(SIGINT, handle_sigint);
 	signal(SIGQUIT, SIG_IGN);
-	if (WIFSIGNALED(status) && WTERMSIG(status) == SIGINT)
+	if (WIFEXITED(status))
 	{
-		write(STDOUT_FILENO, "\n", 1);
 		*data->exit->exit = 130;
-		return (1);
+		return (0);
 	}
 	return (0);
 }

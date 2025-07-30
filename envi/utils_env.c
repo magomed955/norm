@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmutsulk <mmutsulk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mubersan <mubersan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 15:09:22 by mmutsulk          #+#    #+#             */
-/*   Updated: 2025/07/29 16:32:36 by mmutsulk         ###   ########.fr       */
+/*   Updated: 2025/07/30 16:58:29 by mubersan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	error_handling(int err, t_data *data)
 {
+	printf("SADadsda");
 	if (data)
 		free_data(data);
 	if (err == 6)

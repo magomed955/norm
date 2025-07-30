@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmutsulk <mmutsulk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mubersan <mubersan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 19:12:14 by mubersan          #+#    #+#             */
-/*   Updated: 2025/07/29 19:32:38 by mmutsulk         ###   ########.fr       */
+/*   Updated: 2025/07/30 17:08:28 by mubersan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	handle_sigint_status(t_data *data)
 {
 	if (g_exit_status == 130)
 	{
+		printf("yes");
 		*data->exit->exit = 130;
 		g_exit_status = 0;
 	}

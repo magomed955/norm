@@ -6,7 +6,7 @@
 /*   By: mubersan <mubersan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 16:15:50 by mubersan          #+#    #+#             */
-/*   Updated: 2025/07/28 11:30:18 by mubersan         ###   ########.fr       */
+/*   Updated: 2025/07/30 16:10:18 by mubersan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,12 +85,11 @@ char	*ft_substr_gnl(char *buff, size_t start)
 
 int	check_error(t_struct *b, char *line)
 {
+	(void)b;
 	if (!line)
 		return (1);
 	if (check_line(line) == 1)
 		return (2);
-	if (b->bytes_read < BUFFER_SIZES)
-		return (3);
 	return (0);
 }
 
@@ -100,11 +99,5 @@ char	*return_value(t_struct *b, char *line)
 		return (NULL);
 	if (check_error(b, line) == 2)
 		return (b->pos = check_pos(b->buffer, 0) + 1, line);
-	if (check_error(b, line) == 3)
-	{
-		b->pos = 0;
-		b->bytes_read = 0;
-		return (line);
-	}
 	return (0);
 }

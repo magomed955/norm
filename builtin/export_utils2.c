@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmutsulk <mmutsulk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mubersan <mubersan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 17:24:35 by mmutsulk          #+#    #+#             */
-/*   Updated: 2025/07/29 21:50:10 by mmutsulk         ###   ########.fr       */
+/*   Updated: 2025/07/30 19:28:21 by mubersan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,16 +83,19 @@ void	remove_export_only_entry(t_data *data, const char *var_name)
 
 	if (!new_export)
 		return ;
-	while (data->env->export_only[i])
+	if (len != 0)
 	{
-		if (ft_strncmp(data->env->export_only[i], var_name,
-				ft_strlen(var_name)) == 0
-			&& (data->env->export_only[i][ft_strlen(var_name)] == '\0'
-				|| data->env->export_only[i][ft_strlen(var_name)] == '='))
-			free(data->env->export_only[i]);
-		else
-			new_export[j++] = data->env->export_only[i];
-		i++;
+		while (data->env->export_only[i])
+		{
+			if (ft_strncmp(data->env->export_only[i], var_name,
+					ft_strlen(var_name)) == 0
+				&& (data->env->export_only[i][ft_strlen(var_name)] == '\0'
+					|| data->env->export_only[i][ft_strlen(var_name)] == '='))
+				free(data->env->export_only[i]);
+			else
+				new_export[j++] = data->env->export_only[i];
+			i++;
+		}
 	}
 	new_export[j] = NULL;
 	free(data->env->export_only);
